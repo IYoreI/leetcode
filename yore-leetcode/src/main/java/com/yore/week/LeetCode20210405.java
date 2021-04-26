@@ -1,4 +1,4 @@
-package com.yore.competition;
+package com.yore.week;
 
 import java.util.Arrays;
 

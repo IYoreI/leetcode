@@ -1,4 +1,4 @@
-package com.yore.competition;
+package com.yore.week;
 
 /**
  * @author jia bing wen

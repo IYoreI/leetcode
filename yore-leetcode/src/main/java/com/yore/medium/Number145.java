@@ -35,15 +35,26 @@ public class Number145 {
      *
      * @param root
      */
-    public void postOrderNonRecursion(TreeNode root) {
-        Stack<Integer> st = new Stack<>();
+    public List<Integer> postOrderNonRecursion(TreeNode root) {
+        Stack<TreeNode> st = new Stack<>();
+        List<Integer> res = new ArrayList<Integer>();
         TreeNode node = root;
+        TreeNode prev = null;
         while (!st.empty() || node != null) {
             while (node != null) {
-
+                st.push(node);
+                node = node.left;
             }
-
+            node = st.pop();
+            if (node.right == null || node.right == prev) {
+                res.add(node.val);
+                prev = node;
+                node = null;
+            } else {
+                st.push(node);
+                node = node.right;
+            }
         }
-
+        return res;
     }
 }
