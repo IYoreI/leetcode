@@ -6,4 +6,8 @@ package com.yore.algorithm;
  * @description
  */
 public class Test {
+    public static void main(String[] args) {
+        int n=5;
+        System.out.println(1 << n);
+    }
 }
