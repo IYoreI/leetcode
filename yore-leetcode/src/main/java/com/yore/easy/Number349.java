@@ -1,7 +1,8 @@
 package com.yore.easy;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author jia bing wen
@@ -10,7 +11,7 @@ import java.util.Set;
  */
 public class Number349 {
     public static void main(String[] args) {
-        int[] res = intersection(new int[]{4,9,5},new int[]{9,4,9,8,4});
+        int[] res = intersection(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4});
     }
 
     public static int[] intersection(int[] nums1, int[] nums2) {
@@ -27,6 +28,24 @@ public class Number349 {
         int[] res = new int[result.size()];
         int i = 0;
         for (int a : result) {
+            res[i++] = a;
+        }
+        return res;
+    }
+
+    public int[] intersection1(int[] nums1, int[] nums2) {
+        Set<Integer> set1 = new HashSet<>();
+        for (int num : nums1) {
+            set1.add(num);
+        }
+        Set<Integer> set2 = new HashSet<>();
+        for (int num : nums2) {
+            set2.add(num);
+        }
+        set1.retainAll(set2);
+        int[] res = new int[set1.size()];
+        int i = 0;
+        for (int a : set1) {
             res[i++] = a;
         }
         return res;

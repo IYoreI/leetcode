@@ -25,4 +25,7 @@ public class Number461 {
         }
         return count;
     }
+    public int hammingDistance1(int x, int y) {
+        return Integer.bitCount(x ^ y);
+    }
 }
