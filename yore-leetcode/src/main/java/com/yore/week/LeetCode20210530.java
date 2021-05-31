@@ -59,66 +59,6 @@ public class LeetCode20210530 {
     }
 
 
-    int skip = 0;
-    int total = 0;
-    int speed;
-
-    public int minSkips(int[] dist, int speed, int hoursBefore) {
-        speed = speed;
-
-        Stat stat = new Stat(0, 0);
-
-
-        return -1;
-    }
-
-    public int dfs(int[] dist, int index, Stat stat) {
-        if (index >= dist.length) {
-            return -1;
-        }
-        double cost = (double) dist[index] / speed;
-        double diff = Math.ceil(cost) - cost;
-
-
-        if (Math.ceil(stat.getHours()) - stat.getHours() == 0) {
-            stat = new Stat(stat.hours, stat.skip);
-        } else {
-            stat = new Stat(stat.hours, stat.skip + 1);
-        }
-
-        dfs(dist, index + 1, stat);
-    }
-
-
-    class Stat {
-        double hours;
-        int skip;
-
-        public Stat() {
-
-        }
-
-        public Stat(double hours, int skip) {
-            this.hours = hours;
-            this.skip = skip;
-        }
-
-        public double getHours() {
-            return hours;
-        }
-
-        public void setHours(double hours) {
-            this.hours = hours;
-        }
-
-        public int getSkip() {
-            return skip;
-        }
-
-        public void setSkip(int skip) {
-            this.skip = skip;
-        }
-    }
 
     public static void main(String[] args) {
         System.out.println((double) 7 / 2);
