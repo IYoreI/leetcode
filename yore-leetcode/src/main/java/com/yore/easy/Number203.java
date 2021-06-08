@@ -32,4 +32,18 @@ public class Number203 {
         }
         return head;
     }
+
+    public ListNode removeElements1(ListNode head, int val) {
+        ListNode pre = new ListNode(-1);
+        pre.next = head;
+        ListNode listNode = pre;
+        while (listNode.next != null) {
+            if(listNode.next.val == val){
+                listNode.next = listNode.next.next;
+            }else{
+                listNode = listNode.next;
+            }
+        }
+        return pre.next;
+    }
 }
