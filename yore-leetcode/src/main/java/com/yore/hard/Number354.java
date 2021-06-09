@@ -1,5 +1,8 @@
 package com.yore.hard;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * @author yore
  * @date 2021/3/4 9:40
@@ -11,57 +14,41 @@ public class Number354 {
 //        int[][] env = {{5, 4}, {6, 4}, {6, 7}, {2, 3}};
 
         int[][] env = {{2, 100}, {3, 200}, {4, 300}, {5, 500}, {5, 400}, {5, 250}, {6, 370}, {6, 360}, {7, 380}};
-        System.out.println(maxEnvelopes(env));
+        System.out.println(new Number354().maxEnvelopes(env));
     }
 
-    public static int maxEnvelopes(int[][] envelopes) {
-        int length = envelopes.length;
-        int tmp;
-        if (length <= 0) {
-            return 0;
-        }
-        //先按宽度从小到大排序
-        for (int i = 0; i < length; i++) {
-            for (int j = i + 1; j < length; j++) {
-                if (envelopes[i][0] > envelopes[j][0]) {
-                    tmp = envelopes[i][0];
-                    envelopes[i][0] = envelopes[j][0];
-                    envelopes[j][0] = tmp;
+    public int maxEnvelopes(int[][] envelopes) {
+        int n = envelopes.length;
 
-                    tmp = envelopes[i][1];
-                    envelopes[i][1] = envelopes[j][1];
-                    envelopes[j][1] = tmp;
-                }
+        Arrays.sort(envelopes, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] == o2[0] ? o2[1] - o1[1] : o1[0] - o2[0];
             }
+        });
+        int[] height = new int[n];
+        for (int i = 0; i < n; i++) {
+            height[i] = envelopes[i][1];
         }
-        for (int i = 0; i < length; i++) {
-            for (int j = i + 1; j < length; j++) {
-                if (envelopes[i][0] == envelopes[j][0] && envelopes[i][1] > envelopes[j][1]) {
-                    tmp = envelopes[i][0];
-                    envelopes[i][0] = envelopes[j][0];
-                    envelopes[j][0] = tmp;
+        return lengthOfLIS(height);
+    }
 
-                    tmp = envelopes[i][1];
-                    envelopes[i][1] = envelopes[j][1];
-                    envelopes[j][1] = tmp;
+    public int lengthOfLIS(int[] nums) {
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, 1);
+
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[j] < nums[i]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
         }
 
-        for (int[] envelope : envelopes) {
-            System.out.println("[" + envelope[0] + "-" + envelope[1] + "]");
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            res = Math.max(res, dp[i]);
         }
-        int count = 1;
-        int width = envelopes[0][0];
-        int height = envelopes[0][1];
-        for (int i = 1; i < length; i++) {
-            if (envelopes[i][0] > width && envelopes[i][1] > height) {
-                count++;
-                width = envelopes[i][0];
-                height = envelopes[i][1];
-            }
-        }
-        return count;
+        return res;
     }
-
 }
