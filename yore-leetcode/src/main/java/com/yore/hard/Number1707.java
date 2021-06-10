@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @date 2021/5/23 14:55
  * @description
  */
-public class Numbe1707 {
+public class Number1707 {
     public int[] maximizeXor(int[] nums, int[][] queries) {
         int[] res = new int[queries.length];
         Arrays.sort(nums);
