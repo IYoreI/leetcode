@@ -8,8 +8,9 @@ package com.yore.algorithm;
 public class SortAlgorithm {
     public static void main(String[] args) {
         int[] array = new int[]{1, 8, 4, 2, 6, 4, 9, 3, 5};
-//        bubbleSort(array);
-        mergeSortEnter(array);
+        bubbleSort(array);
+//        selectSort(array);
+//        mergeSortEnter(array);
         for (int a : array) {
             System.out.print(a + " ");
         }
@@ -21,17 +22,61 @@ public class SortAlgorithm {
      * @param array 待排序数组
      */
     public static void bubbleSort(int[] array) {
-        if (array == null || array.length <= 1) {
+        if (array == null || array.length < 2) {
             return;
         }
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array.length - i - 1; j++) {
-                //通过异或运算交换两个数的位置
-                if (array[j] < array[j + 1]) {
-                    array[j] = array[j] ^ array[j + 1];
-                    array[j + 1] = array[j] ^ array[j + 1];
-                    array[j] = array[j] ^ array[j + 1];
+        for (int i = array.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (array[j] > array[j + 1]) {
+                    swap(array, j, j + 1);
                 }
+            }
+        }
+    }
+
+    /**
+     * 选择排序
+     *
+     * @param array
+     */
+    public static void selectSort(int[] array) {
+        if (array == null || array.length < 2) {
+            return;
+        }
+        for (int i = 0; i < array.length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < array.length; j++) {
+                minIndex = array[j] < array[minIndex] ? j : minIndex;
+            }
+            swap(array, i, minIndex);
+        }
+    }
+
+    public static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    public static void swapXor(int[] array, int i, int j) {
+        array[i] = array[i] ^ array[j];
+        array[j] = array[i] ^ array[j];
+        array[i] = array[i] ^ array[j];
+    }
+
+
+    /**
+     * 插入排序
+     *
+     * @param array
+     */
+    public static void insertSort(int[] array) {
+        if (array == null || array.length < 2) {
+            return;
+        }
+        for (int i = 1; i < array.length; i++) {
+            for (int j = i - 1; j >= 0 && array[j] > array[j + 1]; j--) {
+                swap(array, j, j + 1);
             }
         }
     }
