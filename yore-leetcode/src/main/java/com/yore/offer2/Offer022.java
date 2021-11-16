@@ -7,7 +7,7 @@ import com.yore.base.ListNode;
  * @date 2021/9/16 10:57
  * @description
  */
-public class Offer22 {
+public class Offer022 {
     public ListNode detectCycle(ListNode head) {
         ListNode fast = head;
         ListNode slow = head;
