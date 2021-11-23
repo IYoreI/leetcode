@@ -8,9 +8,10 @@ package com.yore.algorithm;
 public class SortAlgorithm {
     public static void main(String[] args) {
         int[] array = new int[]{1, 8, 4, 2, 6, 4, 9, 3, 5};
-        bubbleSort(array);
+//        bubbleSort(array);
 //        selectSort(array);
 //        mergeSortEnter(array);
+        mergeSort2(array);
         for (int a : array) {
             System.out.print(a + " ");
         }
@@ -117,4 +118,48 @@ public class SortAlgorithm {
             }
         }
     }
+
+
+    /**
+     * 归并排序 版本2
+     */
+
+    public static void mergeSort2(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        int length = arr.length;
+        process(arr, 0, length - 1);
+    }
+
+    public static void process(int[] arr, int L, int R) {
+        if (L >= R) {
+            return;
+        }
+        int mid = L + ((R - L) >> 1);
+        process(arr, L, mid);
+        process(arr, mid + 1, R);
+        merge(arr, L, mid, R);
+    }
+
+    public static void merge(int[] arr, int L, int mid, int R) {
+        int[] helper = new int[R - L + 1];
+        int index = 0;
+        int p1 = L;
+        int p2 = mid + 1;
+        while (p1 <= mid && p2 <= R) {
+            helper[index++] = arr[p1] <= arr[p2] ? arr[p1++] : arr[p2++];
+        }
+        while (p1 <= mid) {
+            helper[index++] = arr[p1++];
+        }
+        while (p2 <= R) {
+            helper[index++] = arr[p2++];
+        }
+        for (int i = 0; i < helper.length; i++) {
+            arr[L + i] = helper[i];
+        }
+    }
+
+
 }
