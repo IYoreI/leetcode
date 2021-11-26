@@ -1,4 +1,4 @@
-package com.yore.basic.structure;
+package com.yore.algorithm.sort;
 
 /**
  * @author Yore
@@ -14,25 +14,33 @@ public class MaxPriorityQueue {
     private int[] queue;
     private int N = 0;
 
-    private MaxPriorityQueue(int cap) {
+    public MaxPriorityQueue(int cap) {
         //索引0不用，所以多一个位置，方便计算父子节点位置
         queue = new int[cap + 1];
     }
+
     //返回当前队列的最大元素
     private int max() {
         return queue[1];
     }
+
     //父节点索引位置
     private int parent(int node) {
         return node / 2;
     }
+
     //左子节点索引位置
     private int left(int node) {
         return node * 2;
     }
+
     //右子节点索引位置
     private int right(int node) {
         return node * 2 + 1;
+    }
+
+    public boolean isEmpty(){
+        return N <= 0 ;
     }
 
     /**
