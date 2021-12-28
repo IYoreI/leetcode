@@ -11,6 +11,12 @@ import java.util.Stack;
  * @description
  */
 public class Number66 {
+
+    public static void main(String[] args) {
+        Number66 n = new Number66();
+        System.out.println(n.plusOne1(new int[]{9,9,9}));
+    }
+
     public int[] plusOne(int[] digits) {
 
         Stack<Integer> st = new Stack<>();

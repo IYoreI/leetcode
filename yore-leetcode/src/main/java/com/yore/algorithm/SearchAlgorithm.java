@@ -6,6 +6,98 @@ package com.yore.algorithm;
  * @description 查找算法
  */
 public class SearchAlgorithm {
+    public static void main(String[] args) {
+        SearchAlgorithm s = new SearchAlgorithm();
+        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
+        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
+        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
+
+
+        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, -1));
+        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, -1));
+        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, -1));
+
+        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
+        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
+        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
+
+        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
+        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
+        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
+
+        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 9));
+        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 9));
+        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 9));
+//        System.out.println(s.search(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
+    }
+
+
+    /**
+     * ① 查找目标值下标
+     * ② 查找目标值左侧边界
+     * ③ 查找目标值右侧边界
+     * 统一方法： 区间是闭区间 while循环就是<=
+     */
+
+    public int search(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + ((right - left) >> 1);
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+
+    public int searchLeft(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + ((right - left) >> 1);
+            if (nums[mid] == target) {
+                //更新区间
+                right = mid - 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        //左边界  检查越界
+        if (left >= nums.length || nums[left] != target) {
+            return -1;
+        }
+        return left;
+    }
+
+
+    public int searchRight(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + ((right - left) >> 1);
+            if (nums[mid] == target) {
+                //更新区间
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        // 右边界 检查越界
+//        if (right < 0 || nums[right] != target) {
+//            return -1;
+//        }
+        return right;
+    }
 
 
     public int binarySearch(int[] nums, int target) {
@@ -100,21 +192,6 @@ public class SearchAlgorithm {
             }
         }
         return index;
-    }
-
-
-    public static void main(String[] args) {
-        SearchAlgorithm s = new SearchAlgorithm();
-        System.out.println(s.leftIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
-        System.out.println(s.leftBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
-        System.out.println(s.leftIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 2));
-        System.out.println(s.leftBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 2));
-        System.out.println(s.leftIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
-        System.out.println(s.leftBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
-        System.out.println(s.leftIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
-        System.out.println(s.leftBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
-        System.out.println(s.leftIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 5));
-        System.out.println(s.leftBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 5));
     }
 
 
