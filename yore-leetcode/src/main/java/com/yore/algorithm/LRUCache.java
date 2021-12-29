@@ -1,4 +1,4 @@
-package com.yore;
+package com.yore.algorithm;
 
 import com.yore.medium.Number146;
 
