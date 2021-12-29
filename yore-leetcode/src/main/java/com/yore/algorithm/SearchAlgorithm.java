@@ -12,22 +12,27 @@ public class SearchAlgorithm {
         System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
         System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
 
+        System.out.println("----------------------------");
+        System.out.println(s.leftIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
+        System.out.println(s.leftBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
+        System.out.println(s.searchLeft(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
 
-        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, -1));
-        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, -1));
-        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, -1));
-
-        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
-        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
-        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
-
-        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
-        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
-        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
-
-        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 9));
-        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 9));
-        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 9));
+//
+//        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, -1));
+//        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, -1));
+//        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, -1));
+//
+//        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
+//        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
+//        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 3));
+//
+//        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
+//        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
+//        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 4));
+//
+//        System.out.println(s.rightIndex(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 9));
+//        System.out.println(s.rightBound(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 9));
+//        System.out.println(s.searchRight(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 9));
 //        System.out.println(s.search(new int[]{1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5}, 1));
     }
 
@@ -61,6 +66,7 @@ public class SearchAlgorithm {
         int right = nums.length - 1;
         while (left <= right) {
             int mid = left + ((right - left) >> 1);
+            System.out.println(mid);
             if (nums[mid] == target) {
                 //更新区间
                 right = mid - 1;
@@ -83,6 +89,7 @@ public class SearchAlgorithm {
         int right = nums.length - 1;
         while (left <= right) {
             int mid = left + ((right - left) >> 1);
+//            System.out.println(mid);
             if (nums[mid] == target) {
                 //更新区间
                 left = mid + 1;
@@ -93,9 +100,9 @@ public class SearchAlgorithm {
             }
         }
         // 右边界 检查越界
-//        if (right < 0 || nums[right] != target) {
-//            return -1;
-//        }
+        if (right < 0 || nums[right] != target) {
+            return -1;
+        }
         return right;
     }
 
