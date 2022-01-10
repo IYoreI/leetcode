@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * @author Yore
+ * 哈希表加链表实现
  * @date 2021/12/29 14:48
  * @description
  */
