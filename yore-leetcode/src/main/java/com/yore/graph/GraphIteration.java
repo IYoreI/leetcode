@@ -53,4 +53,34 @@ public class GraphIteration {
             }
         }
     }
+
+    /**
+     * 图的拓扑排序  必须是有向无环图
+     * 每次找入度为0的点，入队列，并删除跟其有关联的边，更新其他节点的入度，一直循环
+     * @param graph
+     * @return
+     */
+    public List<Node> sortTopology(Graph graph) {
+        List<Node> result = new ArrayList<>();
+        Map<Node, Integer> inMap = new HashMap<>();
+        Queue<Node> zeroInQueue = new LinkedList<>();
+        for(Node node : graph.nodes.values()){
+            inMap.put(node,node.in);
+            if(node.in == 0){
+                zeroInQueue.offer(node);
+            }
+        }
+        while(!zeroInQueue.isEmpty()){
+            Node cur = zeroInQueue.poll();
+            result.add(cur);
+            for(Node next : cur.nexts){
+                inMap.put(next,inMap.get(next)-1);
+                if(inMap.get(next) == 0){
+                    zeroInQueue.offer(next);
+                }
+            }
+        }
+        return result;
+    }
+
 }
