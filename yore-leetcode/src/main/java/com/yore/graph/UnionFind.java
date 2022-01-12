@@ -65,15 +65,11 @@ public class UnionFind {
             if (aHead != bHead) {
                 int aSetSize = sizeMap.get(aHead);
                 int bSetSize = sizeMap.get(bHead);
-                if (aSetSize >= bSetSize) {
-                    parents.put(bHead, aHead);
-                    sizeMap.put(aHead, aSetSize + bSetSize);
-                    sizeMap.remove(bHead);
-                } else {
-                    parents.put(aHead, bHead);
-                    sizeMap.put(bHead, aSetSize + bSetSize);
-                    sizeMap.remove(aHead);
-                }
+                Node<V> big = aSetSize >= bSetSize ? aHead : bHead;
+                Node<V> small = big == aHead ? bHead : aHead;
+                parents.put(small, big);
+                sizeMap.put(big, aSetSize + bSetSize);
+                sizeMap.remove(small);
             }
         }
 

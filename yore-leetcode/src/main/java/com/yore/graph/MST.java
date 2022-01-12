@@ -1,16 +1,83 @@
 package com.yore.graph;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Yore
  * @date 2022/1/11 19:14
- * @description 最小生成树
+ * @description 最小生成树: k算法和p算法
  */
 public class MST {
+
+    public static class UnionFind {
+        private Map<Node, Node> fatherMap;
+        private Map<Node, Integer> sizeMap;
+
+        public UnionFind() {
+            fatherMap = new HashMap<>();
+            sizeMap = new HashMap<>();
+        }
+
+        public void makeSets(Collection<Node> nodes) {
+            fatherMap.clear();
+            sizeMap.clear();
+            for (Node node : nodes) {
+                fatherMap.put(node, node);
+                sizeMap.put(node, 1);
+            }
+        }
+
+        public Node findFather(Node node) {
+            Stack<Node> path = new Stack<>();
+            while (node != fatherMap.get(node)) {
+                path.push(node);
+                node = fatherMap.get(node);
+            }
+            while (!path.isEmpty()) {
+                fatherMap.put(path.pop(), node);
+            }
+            return node;
+        }
+
+        public boolean isSameSet(Node a, Node b) {
+            return findFather(a) == findFather(b);
+        }
+
+        public void union(Node a, Node b) {
+            if (a == null || b == null) {
+                return;
+            }
+            Node aHead = fatherMap.get(a);
+            Node bHead = fatherMap.get(b);
+            if (aHead != bHead) {
+                int aSetSize = sizeMap.get(aHead);
+                int bSetSize = sizeMap.get(bHead);
+                Node big = aSetSize >= bSetSize ? aHead : bHead;
+                Node small = big == aHead ? bHead : aHead;
+                fatherMap.put(small, big);
+                sizeMap.put(big, aSetSize + bSetSize);
+                sizeMap.remove(small);
+            }
+        }
+    }
+
+    public Set<Edge> kMST(Graph graph) {
+        UnionFind unionFind = new UnionFind();
+        unionFind.makeSets(graph.nodes.values());
+        PriorityQueue<Edge> edgeQueue = new PriorityQueue<>(new EdgeComparator());
+        for (Edge edge : graph.edges) {
+            edgeQueue.add(edge);
+        }
+        Set<Edge> result = new HashSet<>();
+        while (!edgeQueue.isEmpty()) {
+            Edge edge = edgeQueue.poll();
+            if (!unionFind.isSameSet(edge.from, edge.to)) {
+                result.add(edge);
+                unionFind.union(edge.from, edge.to);
+            }
+        }
+        return result;
+    }
 
 
     public static class EdgeComparator implements Comparator<Edge> {
@@ -22,6 +89,7 @@ public class MST {
 
     /**
      * 从一个点开始逐步扩散，每次选择关联边中权重最小的
+     *
      * @param graph
      * @return
      */
