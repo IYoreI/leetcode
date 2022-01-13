@@ -10,17 +10,17 @@ import java.util.List;
 public class Interview_0806 {
     public void hanota(List<Integer> A, List<Integer> B, List<Integer> C) {
         func(A.size(), A, C, B);
+        int[] a = new int[5];
+
     }
 
     public void func(int n, List<Integer> from, List<Integer> to, List<Integer> other) {
-        if (n == 1) {
-            to.add(from.get(from.size() - 1));
-            from.remove(from.size() - 1);
+        if (n < 1) {
+//            to.add(0,from.remove(0));
             return;
         }
         func(n - 1, from, other, to);
-        to.add(from.get(from.size() - 1));
-        from.remove(from.size() - 1);
+        to.add(0,from.remove(0));
         func(n - 1, other, to, from);
     }
 }
