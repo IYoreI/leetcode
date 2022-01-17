@@ -57,9 +57,9 @@ public class LeetCode20220116 {
     public int minMoves_1(int target, int maxDoubles) {
         int count = 0;
         while (target != 1) {
-            if(maxDoubles == 0){
+            if (maxDoubles == 0) {
                 break;
-            }else if(target % 2 == 0 ){
+            } else if (target % 2 == 0) {
                 target /= 2;
                 maxDoubles--;
             } else {
@@ -96,45 +96,41 @@ public class LeetCode20220116 {
     }
 
 
-
     public long mostPoints(int[][] questions) {
         int len = questions.length;
-        long[]record = new long[len];
-        for(int i =0;i<len;i++){
-            record[i]=-1L;
+        long[] record = new long[len];
+        for (int i = 0; i < len; i++) {
+            record[i] = -1L;
         }
-        return process(questions, len, 0,record);
+        return process(questions, len, 0, record);
     }
 
-    public long process(int[][] questions, int len, int index,long[] record) {
+    public long process(int[][] questions, int len, int index, long[] record) {
         if (index >= len) {
             return 0;
         }
-        if(record[index]!=-1){
+        if (record[index] != -1) {
             return record[index];
         }
         int skip = questions[index][1];
-        record[index] = Math.max(questions[index][0] + process(questions, len, index + skip + 1,record),
-                process(questions, len, index + 1,record));
+        record[index] = Math.max(questions[index][0] + process(questions, len, index + skip + 1, record),
+                process(questions, len, index + 1, record));
         return record[index];
     }
 
 
     public long mostPoints2(int[][] questions) {
         int len = questions.length;
-        int[] dp = new int[len];
-//        dp[len] = 0;
-        for(int i=0;i<len;i++){
-            dp[i] = questions[i][0];
-        }
+        long[] dp = new long[len + 1];
+        dp[len - 1] = questions[len - 1][0];
         for (int i = len - 2; i >= 0; i--) {
             int skip = questions[i][1];
-            dp[i] = Math.max(dp[i],dp[i + 1]);
             if (i + skip + 1 < len) {
-                dp[i] = Math.max(dp[i], dp[i + skip + 1] + questions[i][0]);
+                dp[i] = Math.max(dp[i + 1], dp[i + skip + 1] + questions[i][0]);
+            } else {
+                dp[i] = Math.max(dp[i + 1], questions[i][0]);
             }
         }
         return dp[0];
     }
-
 }
