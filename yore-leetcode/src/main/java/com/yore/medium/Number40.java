@@ -1,28 +1,15 @@
-package com.yore.offer2;
+package com.yore.medium;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Yore
- * @date 2022/1/17 10:53
+ * @date 2022/1/17 11:05
  * @description
  */
-public class Offer082 {
-
-    public static void main(String[] args) {
-        Offer082 o = new Offer082();
-        List<List<Integer>> result = o.combinationSum2(new int[]{10, 2, 1, 7, 6, 1, 5}, 8);
-        for (List<Integer> l : result) {
-            System.out.print("[");
-            for (Integer i : l) {
-                System.out.print(i + ",");
-            }
-            System.out.println("]");
-            System.out.println();
-        }
-    }
-
-
+public class Number40 {
     public List<List<Integer>> res = new ArrayList<>();
 
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
@@ -48,6 +35,4 @@ public class Offer082 {
             list.remove(list.size() - 1);
         }
     }
-
-
 }

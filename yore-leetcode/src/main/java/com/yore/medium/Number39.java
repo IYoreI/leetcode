@@ -1,20 +1,14 @@
-package com.yore.offer2;
+package com.yore.medium;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Yore
- * @date 2022/1/17 10:17
+ * @date 2022/1/17 11:05
  * @description
  */
-public class Offer081 {
-
-    public static void main(String[] args) {
-        Offer081 o = new Offer081();
-        System.out.println(o.combinationSum(new int[]{2, 3, 6, 7}, 7));
-    }
-
+public class Number39 {
     public List<List<Integer>> res = new ArrayList<>();
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
