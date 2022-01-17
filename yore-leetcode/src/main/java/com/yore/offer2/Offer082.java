@@ -1,25 +1,20 @@
 package com.yore.offer2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Yore
- * @date 2022/1/17 10:17
+ * @date 2022/1/17 10:53
  * @description
  */
-public class Offer081 {
-
-    public static void main(String[] args) {
-        Offer081 o = new Offer081();
-        System.out.println(o.combinationSum(new int[]{2, 3, 6, 7}, 7));
-    }
-
+public class Offer082 {
     public List<List<Integer>> res = new ArrayList<>();
+    public Map<String, Integer> map = new HashMap<>();
 
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         int N = candidates.length;
         int[] record = new int[N];
+        Arrays.sort(candidates);
         process(candidates, target, 0, record);
         return res;
     }
@@ -27,15 +22,20 @@ public class Offer081 {
     public void process(int[] candidates, int rest, int index, int[] record) {
         if (rest == 0) {
             List<Integer> list = new ArrayList<>();
+            StringBuilder sb = new StringBuilder("");
             for (int i = 0; i < record.length; i++) {
-                for (int t = 0; t < record[i]; t++) {
+                if (record[i] == 1) {
                     list.add(candidates[i]);
+                    sb.append(candidates[i]);
                 }
             }
-            res.add(list);
+            if (!map.containsKey(sb.toString())) {
+                res.add(list);
+                map.put(sb.toString(), 1);
+            }
             return;
         }
-        if (index == candidates.length) {
+        if (index == candidates.length || candidates[index] > rest) {
             return;
         }
         process(candidates, rest, index + 1, record);
