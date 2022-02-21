@@ -9,7 +9,6 @@ public class Number45 {
     public int jump(int[] nums) {
         int n = nums.length;
         int maxPos = 0;
-        int rightBound = 0;
         int end = 0;
         int step = 0;
         for (int i = 0; i < n - 1; i++) {
