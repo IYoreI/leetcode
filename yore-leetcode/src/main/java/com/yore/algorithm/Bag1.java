@@ -1,15 +1,17 @@
-package com.yore;
+package com.yore.algorithm;
+
+import com.yore.Test;
 
 import java.util.Arrays;
 
 /**
  * @author Yore
- * @date 2022/3/1 20:59
+ * @date 2022/3/6 16:11
  * @description
  */
-public class Test {
+public class Bag1 {
     public static void main(String[] args) {
-        Test t = new Test();
+        com.yore.Test t = new Test();
         int[] weights = new int[]{1, 3, 4};
         int[] values = new int[]{15, 20, 30};
         System.out.println(t.maxValue(weights, values, 4));
@@ -89,9 +91,9 @@ public class Test {
     }
 
 
-
     /**
-     *  动态规划版本
+     * 动态规划版本
+     *
      * @param weights
      * @param values
      * @param bag
@@ -112,5 +114,4 @@ public class Test {
         }
         return dp[0][bag];
     }
-
 }
