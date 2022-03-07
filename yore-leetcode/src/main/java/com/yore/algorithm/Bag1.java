@@ -1,7 +1,5 @@
 package com.yore.algorithm;
 
-import com.yore.Test;
-
 import java.util.Arrays;
 
 /**
@@ -11,7 +9,7 @@ import java.util.Arrays;
  */
 public class Bag1 {
     public static void main(String[] args) {
-        com.yore.Test t = new Test();
+        Bag1 t = new Bag1();
         int[] weights = new int[]{1, 3, 4};
         int[] values = new int[]{15, 20, 30};
         System.out.println(t.maxValue(weights, values, 4));
