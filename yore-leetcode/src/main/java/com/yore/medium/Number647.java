@@ -12,6 +12,7 @@ public class Number647 {
     }
 
     public int count = 0;
+
     public int countSubstrings(String s) {
         for (int i = 0; i < s.length(); i++) {
             count++;
@@ -20,6 +21,7 @@ public class Number647 {
         }
         return count;
     }
+
     public void process(String s, int left, int right) {
         while (left >= 0 && right < s.length()) {
             if (s.charAt(left--) != s.charAt(right++)) {
@@ -62,4 +64,24 @@ public class Number647 {
 //        }
 //        return list;
 //    }
+    public int countSubstrings2(String s) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            count += isPar(s, i, i);
+            count += isPar(s, i, i + 1);
+        }
+        return count;
+    }
+
+    public int isPar(String s, int l, int r) {
+        int count = 0;
+        while (l >= 0 && r < s.length()) {
+            if (s.charAt(l--) == s.charAt(r++)) {
+                count++;
+            } else {
+                break;
+            }
+        }
+        return count;
+    }
 }
