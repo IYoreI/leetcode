@@ -2,7 +2,6 @@ package com.yore.offer2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * @author Yore
@@ -25,62 +24,38 @@ public class Offer086 {
     public List<List<String>> res = new ArrayList<>();
 
     public String[][] partition(String s) {
-        process(s, 0, new ArrayList<>());
+        helper(s, 0, new ArrayList<>());
         String[][] result = new String[res.size()][];
         for (int i = 0; i < res.size(); i++) {
-            result[i] = res.get(i).toArray(new String[0]);
+            result[i] = new String[res.get(i).size()];
+            for (int j = 0; j < res.get(i).size(); j++) {
+                result[i][j] = res.get(i).get(j);
+            }
         }
         return result;
     }
 
-    public void process(String s, int index, List<String> list) {
+    public boolean isPalindrom(String s, int left, int right) {
+        while (left < right) {
+            if (s.charAt(left++) != s.charAt(right--)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void helper(String s, int index, List<String> list) {
         if (index == s.length()) {
             res.add(new ArrayList<>(list));
             return;
         }
-        list.add(String.valueOf(s.charAt(index)));
-        print(index);
-        System.out.println(list);
-        process(s, index + 1, list);
-        list.remove(list.size() - 1);
-
-        int left = index - 1;
-        int right = index + 1;
-        Stack<String> st = new Stack<>();
-        while (left >= 0 && right < s.length()) {
-            if (s.charAt(left) != s.charAt(right)) {
-                break;
+        for (int i = index; i < s.length(); i++) {
+            if (isPalindrom(s, index, i)) {
+                String cur = s.substring(index, i + 1);
+                list.add(cur);
+                helper(s, i + 1, list);
+                list.remove(list.size() - 1);
             }
-            st.push(list.remove(list.size() - 1));
-            list.add(s.substring(left--, ++right));
-            process(s, right, list);
-            list.remove(list.size() - 1);
-        }
-        while (!st.isEmpty()) {
-            list.add(st.pop());
-        }
-        left = index;
-        right = index + 1;
-
-        while (left >= 0 && right < s.length()) {
-            if (s.charAt(left) != s.charAt(right)) {
-                break;
-            }
-            if (left < index) {
-                st.push(list.remove(list.size() - 1));
-            }
-            list.add(s.substring(left--, ++right));
-            process(s, right, list);
-            list.remove(list.size() - 1);
-        }
-        while (!st.isEmpty()) {
-            list.add(st.pop());
-        }
-    }
-
-    public void print(int idx) {
-        for (int i = 0; i < idx; i++) {
-            System.out.print(" ");
         }
     }
 
