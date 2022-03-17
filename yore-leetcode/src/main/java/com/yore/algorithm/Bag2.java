@@ -16,10 +16,10 @@ public class Bag2 {
         int[] values = new int[]{15, 20, 30};
         int rest = 4;
         System.out.println(bag.maxValue(weights, values, rest));
-        int[] dp = new int[rest+1];
-        Arrays.fill(dp,-2);
-        System.out.println(bag.processCache(weights,values,rest,dp));
-        System.out.println(bag.processDp(weights,values,rest));
+        int[] dp = new int[rest + 1];
+        Arrays.fill(dp, -2);
+        System.out.println(bag.processCache(weights, values, rest, dp));
+        System.out.println(bag.processDp(weights, values, rest));
     }
 
     public int maxValue(int[] weights, int[] values, int bag) {
@@ -55,6 +55,7 @@ public class Bag2 {
 
     /**
      * 记忆化搜索
+     *
      * @param weights
      * @param values
      * @param rest
@@ -86,17 +87,18 @@ public class Bag2 {
 
     /**
      * DP
+     *
      * @param weights
      * @param values
      * @param rest
      * @return
      */
-    public int processDp(int[] weights,int[] values,int rest){
-        int[] dp = new int[rest+1];
-        for(int i=0;i<=rest;i++){
-            for(int j=0;j<weights.length;j++){
-                if(i-weights[j]>=0){
-                    dp[i] = Math.max(dp[i],dp[i-weights[j]]+values[j]);
+    public int processDp(int[] weights, int[] values, int rest) {
+        int[] dp = new int[rest + 1];
+        for (int i = 0; i <= rest; i++) {
+            for (int j = 0; j < weights.length; j++) {
+                if (i - weights[j] >= 0) {
+                    dp[i] = Math.max(dp[i], dp[i - weights[j]] + values[j]);
                 }
             }
         }

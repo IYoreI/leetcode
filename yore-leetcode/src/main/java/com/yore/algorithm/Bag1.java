@@ -14,6 +14,7 @@ public class Bag1 {
         int[] values = new int[]{15, 20, 30};
         System.out.println(t.maxValue(weights, values, 4));
         System.out.println(t.dpWay(weights, values, 4));
+        System.out.println(t.dpWay2(weights, values, 4));
     }
 
 
@@ -104,6 +105,21 @@ public class Bag1 {
         //边界值 赋值
         for (int index = n - 1; index >= 0; index--) {
             for (int rest = 0; rest <= bag; rest++) {
+                dp[index][rest] = dp[index + 1][rest];
+                if (rest - weights[index] >= 0) {
+                    dp[index][rest] = Math.max(dp[index + 1][rest - weights[index]] + values[index], dp[index][rest]);
+                }
+            }
+        }
+        return dp[0][bag];
+    }
+
+    public int dpWay2(int[] weights, int[] values, int bag) {
+        int n = weights.length;
+        int[][] dp = new int[n + 1][bag + 1];
+        //边界值 赋值
+        for (int rest = 0; rest <= bag; rest++) {
+            for (int index = n - 1; index >= 0; index--) {
                 dp[index][rest] = dp[index + 1][rest];
                 if (rest - weights[index] >= 0) {
                     dp[index][rest] = Math.max(dp[index + 1][rest - weights[index]] + values[index], dp[index][rest]);
