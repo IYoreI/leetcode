@@ -6,8 +6,32 @@ package com.yore.medium;
  * @description
  */
 public class Number877 {
+
     /**
-     * 思路清晰  时间复杂度高  优化为DP
+     * 递归版本
+     * @param piles
+     * @return
+     */
+    public boolean stoneGame1(int[] piles) {
+        int n = piles.length;
+        return f(piles,0,n-1) > s(piles,0,n-1);
+    }
+
+    public int f(int[] piles,int left,int right){
+        if(left == right){
+            return piles[left];
+        }
+        return Math.max(piles[left]+s(piles,left+1,right),piles[right]+s(piles,left,right-1));
+    }
+
+    public int s(int[] piles,int left,int right){
+        if(left == right){
+            return 0;
+        }
+        return Math.min(f(piles,left+1,right),f(piles,left,right-1));
+    }
+    /**
+     * 递归版本，加记忆化搜索
      *
      * @param piles
      * @return
