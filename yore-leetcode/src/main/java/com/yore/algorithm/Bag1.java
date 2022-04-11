@@ -24,8 +24,8 @@ public class Bag1 {
         for (int[] t : dp) {
             Arrays.fill(t, -1);
         }
-        return process1(weights, values, 0, bag);
-//        return process2(weights, values, 0, bag, dp);
+//        return process1(weights, values, 0, bag);
+        return process2(weights, values, 0, bag, dp);
     }
 
     /**

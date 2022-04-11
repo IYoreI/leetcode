@@ -11,6 +11,9 @@ import java.util.PriorityQueue;
  * @description
  */
 public class Number23 {
+
+
+
     public ListNode mergeKLists(ListNode[] lists) {
         ListNode head = null;
         ListNode it = null;
