@@ -16,6 +16,5 @@ public class Test {
         } catch (Throwable t) {
            main(args);
         }
-
     }
 }
