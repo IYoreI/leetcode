@@ -1,6 +1,6 @@
 package com.yore;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 /**
  * @author Yore
@@ -10,7 +10,7 @@ import java.util.Random;
 public class Test {
 
     public static void main(String[] args) {
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         for(int i=0;i<10;i++){
             int number = random.nextInt(10);
             System.out.println(number);
