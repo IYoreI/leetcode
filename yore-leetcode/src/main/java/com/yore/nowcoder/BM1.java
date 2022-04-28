@@ -5,23 +5,22 @@ import com.yore.base.ListNode;
 /**
  * @author Yore
  * @date 2022/4/27 9:24
- * @description
+ * @description 翻转链表
  */
 public class BM1 {
     public ListNode ReverseList(ListNode head) {
         if (head == null) {
             return null;
         }
-        ListNode dubby = new ListNode(-1);
-        dubby.next = head;
-        ListNode p = head;
-        ListNode q = p.next;
-        while (q != null) {
-            p.next = q.next;
-            q.next = dubby.next;
-            dubby.next = q;
-            q = p.next;
+        ListNode pre = new ListNode(-1);
+        pre.next = head;
+        ListNode p = head.next;
+        while(p!=null){
+            head.next = p.next;
+            p.next = pre.next;
+            pre.next =p;
+            p = head.next;
         }
-        return dubby.next;
+        return pre.next;
     }
 }
