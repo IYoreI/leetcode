@@ -9,45 +9,52 @@ import java.util.List;
 
 /**
  * @author Yore
- * @date 2022/5/5 14:52
- * @description 二叉树前序遍历
+ * @date 2022/5/9 10:00
+ * @description 二叉树后序遍历
  */
-public class BM23 {
+public class BM25 {
     List<Integer> list = new ArrayList<>();
 
-    public int[] preorderTraversal(TreeNode root) {
-        preOrder(root);
+    public int[] postorderTraversal(TreeNode root) {
+        postOrder(root);
         return list.stream().mapToInt(Integer::new).toArray();
     }
 
-    public void preOrder(TreeNode node) {
+    public void postOrder(TreeNode node) {
         if (node == null) {
             return;
         }
+        postOrder(node.left);
+        postOrder(node.right);
         list.add(node.val);
-        preOrder(node.left);
-        preOrder(node.right);
     }
 
     /**
-     * 迭代遍历
+     * 迭代后序遍历
      *
      * @param root
      * @return
      */
-    public int[] preorderTraversal2(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        TreeNode node = root;
+    public int[] postorderTraversal2(TreeNode root) {
         Deque<TreeNode> queue = new LinkedList<>();
+        TreeNode node = root;
+        TreeNode pre = null;
         while (!queue.isEmpty() || node != null) {
             while (node != null) {
                 queue.offerLast(node);
-                list.add(node.val);
                 node = node.left;
             }
             node = queue.pollLast();
-            node = node.right;
+            if (node.right == null || node.right == pre) {
+                list.add(node.val);
+                pre = node;
+                node = null;
+            } else {
+                queue.offerLast(node);
+                node = node.right;
+            }
         }
         return list.stream().mapToInt(Integer::new).toArray();
     }
+
 }
