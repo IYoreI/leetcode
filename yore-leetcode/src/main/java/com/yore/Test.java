@@ -16,6 +16,7 @@ public class Test {
         short b = 127;
         a = (short) (a + b);
         System.out.println(a);
+        System.out.println(0.1+0.2);
     }
 
     public static long byteArrayToLong(byte[] bytes) {
