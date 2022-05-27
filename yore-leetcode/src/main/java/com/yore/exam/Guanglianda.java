@@ -1,7 +1,6 @@
 package com.yore.exam;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Yore
@@ -10,10 +9,57 @@ import java.util.Map;
  */
 public class Guanglianda {
 
+    //    public static void main(String[] args) {
+//        String input = "#938765";
+//        System.out.println(calCount(input));
+//    }
     public static void main(String[] args) {
-        String input = "#938765";
-        System.out.println(calCount(input));
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            int m = sc.nextInt();
+            int n = sc.nextInt();
+            List<Integer> list = new ArrayList<>();
+            for (int i = m; i <= n; i++) {
+                int sum = 0;
+                int num = i;
+                while (num != 0) {
+                    int t = num % 10;
+                    num /= 10;
+                    sum += Math.pow(t, 3);
+                }
+                if (sum == i) {
+                    list.add(sum);
+                }
+            }
+            if (list.size() > 0) {
+                for (int num : list) {
+                    System.out.print(num + " ");
+                }
+            } else {
+                System.out.print("no");
+            }
+            System.out.println();
+        }
     }
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        while (sc.hasNext()) {
+//            String line = sc.nextLine();
+//            String[] content = line.split(" ");
+//            DecimalFormat df = new DecimalFormat("0.00");
+//            df.setRoundingMode(RoundingMode.HALF_UP);
+//            double n = Integer.valueOf(content[0]);
+//            int m = Integer.valueOf(content[1]);
+//            double result = 0.0;
+//            while (m > 0) {
+//                result +=n;
+//                n = Math.sqrt(n);
+//                m--;
+//            }
+//            System.out.println(df.format(result));
+//        }
+//    }
+
 
     public static int calCount(String input) {
         int count = 0;
