@@ -7,18 +7,20 @@ package com.yore;
  */
 public class Test2 {
     public static void main(String[] args) {
-        System.out.println(test1());
+//        System.out.println(SubClass.value);
+        SuperClass[] sca = new SuperClass[10];
     }
+}
 
-    public static int test1() {
-        int x = 1;
-        try {
-            return x;
-        } catch (Exception e) {
-            x = 3;
-        } finally {
-            x = 2;
-            return x;
-        }
+class SuperClass{
+    static{
+        System.out.println("SuperClass init");
+    }
+    public static int value = 123;
+}
+
+class SubClass extends SuperClass{
+    static{
+        System.out.println("SubClass init");
     }
 }
